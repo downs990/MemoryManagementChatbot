@@ -4,6 +4,7 @@
 #include <wx/bitmap.h>
 #include <string>
 
+//abc
 class GraphNode; // forward declaration
 class ChatLogic; // forward declaration
 

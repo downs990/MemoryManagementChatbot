@@ -6,7 +6,8 @@
 #include "chatlogic.h"
 #include "chatgui.h"
 
-// testing if keeps changes in VM
+// 123
+// testing if keeps changes in VM 
 // size of chatbot window
 const int width = 414;
 const int height = 736;
