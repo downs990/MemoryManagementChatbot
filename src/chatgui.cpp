@@ -106,8 +106,21 @@ BEGIN_EVENT_TABLE(ChatBotPanelDialog, wxPanel)
 EVT_PAINT(ChatBotPanelDialog::paintEvent) // catch paint events
 END_EVENT_TABLE()
 
-ChatBotPanelDialog::ChatBotPanelDialog(wxWindow *parent, wxWindowID id)
-    : wxScrolledWindow(parent, id)
+  
+
+ChatBotPanelDialog::ChatBotPanelDialog(ChatBotPanelDialog &source){
+	_chatLogic = source._chatLogic;
+    source._chatLogic = nullptr;
+}
+
+ChatBotPanelDialog& ChatBotPanelDialog::operator=(ChatBotPanelDialog &source){
+	_chatLogic = source._chatLogic;
+    source._chatLogic = nullptr;
+    return *this;
+}
+  
+  
+ChatBotPanelDialog::ChatBotPanelDialog(wxWindow *parent, wxWindowID id) : wxScrolledWindow(parent, id)
 {
     // sizer will take care of determining the needed scroll size
     _dialogSizer = new wxBoxSizer(wxVERTICAL);
@@ -137,7 +150,9 @@ ChatBotPanelDialog::~ChatBotPanelDialog()
     //// STUDENT CODE
     ////
 
-    delete _chatLogic;
+  	if (_chatLogic != nullptr){
+    	delete _chatLogic; 
+    }
 
     ////
     //// EOF STUDENT CODE

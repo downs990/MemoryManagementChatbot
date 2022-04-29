@@ -24,8 +24,13 @@ private:
 public:
     // constructor / destructor
     ChatBotPanelDialog(wxWindow *parent, wxWindowID id);
+    ChatBotPanelDialog(ChatBotPanelDialog &source) ;
     ~ChatBotPanelDialog();
 
+
+    ChatBotPanelDialog &operator=(ChatBotPanelDialog &source);
+    
+    
     // getter / setter
     ChatLogic *GetChatLogicHandle() { return _chatLogic; }
 
