@@ -28,7 +28,7 @@ public:
     ~ChatBotPanelDialog();
 
 
-    ChatBotPanelDialog &operator=(ChatBotPanelDialog &source);
+    ChatBotPanelDialog& operator=(ChatBotPanelDialog &source);// assignment operator 
     
     
     // getter / setter
