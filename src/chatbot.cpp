@@ -46,10 +46,31 @@ ChatBot::~ChatBot()
 ////
 
  
-// assignment operator 
+// copy assignment operator 
 ChatBot& ChatBot::operator=(ChatBot &source){
    std::cout << "ChatBot Assignment Operator" << std::endl;
    
+  	
+    // Protects against self assignment. 
+    if (this == &source){
+          return *this;
+     }
+  
+  	// TODO: Add _currentNode ??? 	
+    // TODO: Shoudl I use delete like this ???
+  	
+  	// Clear existing data in this chatbot. 
+  	delete _image;
+  	delete _rootNode;
+  	delete _chatLogic;
+  
+  	// Assign data to this chatbot that exists in source chatbot.
+  	*_image = *source._image;
+  	*_rootNode = *source._rootNote;
+  	*_chatLogic = *source._chatLogic;
+  
+  	// return pointer to this chatbot. 
+  	return *this;
 } 
 
 // copy constructor
