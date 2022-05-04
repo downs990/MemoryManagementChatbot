@@ -55,17 +55,18 @@ ChatBot& ChatBot::operator=(ChatBot &source){
     if (this == &source){
           return *this;
      }
-  
-  	// TODO: Add _currentNode ??? 	
+   
     // TODO: Shoudl I use delete like this ???
   	
   	// Clear existing data in this chatbot. 
   	delete _image;
+  	delete _currentNode;
   	delete _rootNode;
   	delete _chatLogic;
   
   	// Assign data to this chatbot that exists in source chatbot.
   	*_image = *source._image;
+  	*_currentNode = *source_currentNode;
   	*_rootNode = *source._rootNote;
   	*_chatLogic = *source._chatLogic;
   
@@ -76,7 +77,20 @@ ChatBot& ChatBot::operator=(ChatBot &source){
 // copy constructor
 ChatBot::ChatBot(const ChatBot &source){
 	std::cout << "ChatBot Copy Constructor" << std::endl;
-
+  
+  	*_image = *source._image;
+  	*_currentNode = *source_currentNode;
+  	*_rootNode = *source._rootNote;
+  	*_chatLogic = *source._chatLogic;
+  
+	// TODO: should I create new GraphNode() objects everywhere in this file where 
+  	// 		rule_of_three.cpp has new int[] since I also use delete ??
+  
+  
+  	// new / delete 
+  	// malloc / free 
+  
+  
 }
 
 
@@ -106,8 +120,25 @@ ChatBot& ChatBot::operator=(ChatBot &&source){
     	return *this;
     }
   
-  	delete 	
+    // TODO: Are these deletes necessary ?? Deallocate memory another way ? 
+  	delete _image;  
+  	delete _currentNode;
+  	delete _rootNode;
+  	delete _chatLogic;
+      
+   	// Update this ChatBot's member handles to that of sources
+  	_image = source._image;
+  	_currentNode = source._currentNode;
+  	_rootNode = source._rootNode;
+  	_chatLogic = source._chatLogic;
   
+  	// Invalidate source's member handles 
+  	source._image = nullptr;
+  	source._currentNode = nullptr;
+  	source._rootNode = nullptr;
+  	source._chatLogic = nullptr;
+  	
+  	return *this;
 }  
     
 
