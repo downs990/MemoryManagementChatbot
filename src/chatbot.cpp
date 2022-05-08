@@ -66,8 +66,8 @@ ChatBot& ChatBot::operator=(ChatBot &source){
   
   	// Assign data to this chatbot that exists in source chatbot.
   	*_image = *source._image;
-  	*_currentNode = *source_currentNode;
-  	*_rootNode = *source._rootNote;
+  	*_currentNode = *source._currentNode;
+  	*_rootNode = *source._rootNode;
   	*_chatLogic = *source._chatLogic;
   
   	// return pointer to this chatbot. 
@@ -79,12 +79,12 @@ ChatBot::ChatBot(const ChatBot &source){
 	std::cout << "ChatBot Copy Constructor" << std::endl;
   
   	*_image = *source._image;
-  	*_currentNode = *source_currentNode;
-  	*_rootNode = *source._rootNote;
+  	*_currentNode = *source._currentNode;
+  	*_rootNode = *source._rootNode;
   	*_chatLogic = *source._chatLogic;
   
 	// TODO: should I create new GraphNode() objects everywhere in this file where 
-  	// 		rule_of_three.cpp has new int[] since I also use delete ??
+  	// 		rule_of_three.cpp has new int[] since I also use delete ????
   
   
   	// new / delete 

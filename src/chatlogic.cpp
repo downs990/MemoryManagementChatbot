@@ -5,6 +5,8 @@
 #include <iterator>
 #include <tuple>
 #include <algorithm>
+#include <memory>
+
 
 #include "graphedge.h"
 #include "graphnode.h"
@@ -132,7 +134,9 @@ void ChatLogic::LoadAnswerGraphFromFile(std::string filename)
                         // create new element if ID does not yet exist
                         if (newNode == _nodes.end())
                         {
-                            _nodes.emplace_back(new GraphNode(id));
+                          	std::unique_ptr<GraphNode> newGraphNode(new GraphNode(id)); // right ??
+                            _nodes.emplace_back(newGraphNode);
+                          
                             newNode = _nodes.end() - 1; // get iterator to last element
 
                             // add all answers to current node
