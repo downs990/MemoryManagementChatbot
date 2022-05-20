@@ -55,8 +55,7 @@ ChatBot& ChatBot::operator=(ChatBot &source){
     if (this == &source){
           return *this;
      }
-   
-    // TODO: Shoudl I use delete like this ???
+    
   	
   	// Clear existing data in this chatbot. 
   	delete _image;
@@ -77,6 +76,9 @@ ChatBot& ChatBot::operator=(ChatBot &source){
 // copy constructor
 ChatBot::ChatBot(const ChatBot &source){
 	std::cout << "ChatBot Copy Constructor" << std::endl;
+  
+// TODO: Allocate new memory for _image ???   
+//   	_image = new wxBitmap(*source._image.filename, wxBITMAP_TYPE_PNG);
   
   	*_image = *source._image;
   	*_currentNode = *source._currentNode;
@@ -120,11 +122,11 @@ ChatBot& ChatBot::operator=(ChatBot &&source){
     	return *this;
     }
   
-    // TODO: Are these deletes necessary ?? Deallocate memory another way ? 
+    // TODO: Are these deletes necessary ??  
   	delete _image;  
-  	delete _currentNode;
-  	delete _rootNode;
-  	delete _chatLogic;
+//   	delete _currentNode;
+//   	delete _rootNode;
+//   	delete _chatLogic;
       
    	// Update this ChatBot's member handles to that of sources
   	_image = source._image;
