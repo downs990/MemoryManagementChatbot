@@ -107,18 +107,7 @@ EVT_PAINT(ChatBotPanelDialog::paintEvent) // catch paint events
 END_EVENT_TABLE()
 
   
-
-ChatBotPanelDialog::ChatBotPanelDialog(ChatBotPanelDialog &source){
-	_chatLogic = source._chatLogic;
-    source._chatLogic = nullptr;
-}
-
-ChatBotPanelDialog& ChatBotPanelDialog::operator=(ChatBotPanelDialog &source){
-	_chatLogic = source._chatLogic;
-    source._chatLogic = nullptr;
-    return *this;
-}
-  
+ 
   
 ChatBotPanelDialog::ChatBotPanelDialog(wxWindow *parent, wxWindowID id) : wxScrolledWindow(parent, id)
 {
@@ -133,7 +122,8 @@ ChatBotPanelDialog::ChatBotPanelDialog(wxWindow *parent, wxWindowID id) : wxScro
     ////
 
     // create chat logic instance
-    _chatLogic = new ChatLogic(); 
+//     _chatLogic = new ChatLogic(); 
+  	_chatLogic = std::make_unique<ChatLogic>(); 
 
     // pass pointer to chatbot dialog so answers can be displayed in GUI
     _chatLogic->SetPanelDialogHandle(this);
@@ -150,9 +140,9 @@ ChatBotPanelDialog::~ChatBotPanelDialog()
     //// STUDENT CODE
     ////
 
-  	if (_chatLogic != nullptr){
-    	delete _chatLogic; 
-    }
+//   	if (_chatLogic != nullptr){
+//     	delete _chatLogic; 
+//     }
 
     ////
     //// EOF STUDENT CODE

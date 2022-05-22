@@ -46,6 +46,22 @@ ChatBot::~ChatBot()
 ////
 
  
+ 
+
+// copy constructor
+ChatBot::ChatBot( ChatBot &source){
+	std::cout << "ChatBot Copy Constructor" << std::endl;
+   
+  
+  	this->_image = new wxBitmap(*source._image);
+  	this->_currentNode = source._currentNode;
+  	this->_rootNode = source._rootNode;
+  	this->_chatLogic->SetChatbotHandle(this);
+   
+  
+}
+
+
 // copy assignment operator 
 ChatBot& ChatBot::operator=(ChatBot &source){
    std::cout << "ChatBot Assignment Operator" << std::endl;
@@ -57,64 +73,37 @@ ChatBot& ChatBot::operator=(ChatBot &source){
      }
     
   	
-  	// Clear existing data in this chatbot. 
-  	delete _image;
-  	delete _currentNode;
-  	delete _rootNode;
-  	delete _chatLogic;
-  
   	// Assign data to this chatbot that exists in source chatbot.
-  	*_image = *source._image;
-  	*_currentNode = *source._currentNode;
-  	*_rootNode = *source._rootNode;
-  	*_chatLogic = *source._chatLogic;
+  	this->_image = new wxBitmap(*source._image);
+  	this->_currentNode = source._currentNode;
+  	this->_rootNode = source._rootNode;
+  	this->_chatLogic->SetChatbotHandle(this);
   
   	// return pointer to this chatbot. 
   	return *this;
 } 
 
-// copy constructor
-ChatBot::ChatBot(const ChatBot &source){
-	std::cout << "ChatBot Copy Constructor" << std::endl;
-  
-// TODO: Allocate new memory for _image ???   
-//   	_image = new wxBitmap(*source._image.filename, wxBITMAP_TYPE_PNG);
-  
-  	*_image = *source._image;
-  	*_currentNode = *source._currentNode;
-  	*_rootNode = *source._rootNode;
-  	*_chatLogic = *source._chatLogic;
-  
-	// TODO: should I create new GraphNode() objects everywhere in this file where 
-  	// 		rule_of_three.cpp has new int[] since I also use delete ????
-  
-  
-  	// new / delete 
-  	// malloc / free 
-  
-  
-}
 
-
-// move constructor
+// // move constructor
 ChatBot::ChatBot(ChatBot &&source){
 	std::cout << "ChatBot Move Constructor" << std::endl;
   
   	// Update this ChatBot's member handles to that of sources
-  	_image = source._image;
-  	_currentNode = source._currentNode;
-  	_rootNode = source._rootNode;
-  	_chatLogic = source._chatLogic;
+  	this->_image = source._image;
+  	this->_currentNode = source._currentNode;
+  	this->_rootNode = source._rootNode;
+  	this->_chatLogic = source._chatLogic;
+  	this->_chatLogic->SetChatbotHandle(this);
   
   	// Invalidate source's member handles 
-  	source._image = nullptr;
+  	source._image = NULL;
   	source._currentNode = nullptr;
   	source._rootNode = nullptr;
   	source._chatLogic = nullptr;
   
 }           
 
-// move assignment operator 
+// // move assignment operator 
 ChatBot& ChatBot::operator=(ChatBot &&source){
 	std::cout << "ChatBot Move Assignment Operator" << std::endl;
   	
@@ -122,20 +111,22 @@ ChatBot& ChatBot::operator=(ChatBot &&source){
     	return *this;
     }
   
-    // TODO: Are these deletes necessary ??  
-  	delete _image;  
-//   	delete _currentNode;
-//   	delete _rootNode;
-//   	delete _chatLogic;
+  
+  	if (this->_image != NULL){
+  		delete this->_image;   
+    } 	 
+      
       
    	// Update this ChatBot's member handles to that of sources
-  	_image = source._image;
-  	_currentNode = source._currentNode;
-  	_rootNode = source._rootNode;
-  	_chatLogic = source._chatLogic;
+  	this->_image = source._image;
+  	this->_currentNode = source._currentNode;
+  	this->_rootNode = source._rootNode;
+  	this->_chatLogic = source._chatLogic;
+  	this->_chatLogic->SetChatbotHandle(this);
+  
   
   	// Invalidate source's member handles 
-  	source._image = nullptr;
+  	source._image = NULL;
   	source._currentNode = nullptr;
   	source._rootNode = nullptr;
   	source._chatLogic = nullptr;

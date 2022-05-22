@@ -26,13 +26,13 @@ public:
     // constructors / destructors
     ChatBot();                     // constructor WITHOUT memory allocation
     ChatBot(std::string filename); // constructor WITH memory allocation
-    ~ChatBot();
+    ~ChatBot(); 
 
     //// STUDENT CODE
     ////
     
     ChatBot& operator=(ChatBot &source); // copy assignment operator 
-    ChatBot(const ChatBot &source);      // copy constructor 
+    ChatBot(ChatBot &source);      // copy constructor 
     ChatBot(ChatBot &&source);           // move constructor 
     ChatBot& operator=(ChatBot &&source); // move assignment operator 
     
